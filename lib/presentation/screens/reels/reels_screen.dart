@@ -16,10 +16,9 @@ class ReelsScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: CustomNavBar(selectedIndex: 1),
       body: SizedBox.expand(
-        // makes child fill entire screen
         child: Image.asset(
           homeController.postdetails[index]["img"],
-          fit: BoxFit.cover, // ensures image covers whole screen
+          fit: BoxFit.cover,
         ),
       ),
     );
