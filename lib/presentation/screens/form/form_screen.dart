@@ -19,80 +19,92 @@ class FormScreen extends StatelessWidget {
     final controller = Get.put(FormController());
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: Colors.grey,
       body: Stack(
         children: [
           // ========== Bottom Decorative Screen ==========
           Positioned.fill(
-            child: Container(
-              color: AppColors.lightgrey.withValues(alpha: 51), // 20% opacity
-
+            child: SizedBox(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Image.asset(
                   CustomImages.containerbackround,
-                ), // optional background
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
 
           // ========== Centered Card ==========
           Center(
-            child: Card(
-              elevation: 6,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 24,
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        StaticStrings.personalizing,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.blacknormal,
-                        ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Card(
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            StaticStrings.personalizing,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.blacknormal,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          buildDropdown(
+                            'Current School',
+                            controller.schoolOptions,
+                            controller.selectedSchool,
+                          ),
+                          const SizedBox(height: 16),
+                          buildDropdown(
+                            'Elective Subject',
+                            controller.subjectOptions,
+                            controller.selectedSubject,
+                          ),
+                          const SizedBox(height: 16),
+                          buildDropdown(
+                            'Current Grade',
+                            controller.gradeOptions,
+                            controller.selectedGrade,
+                          ),
+                          const SizedBox(height: 16),
+                          buildDropdown(
+                            'How Did You Hear About Us?',
+                            controller.referralOptions,
+                            controller.selectedReferral,
+                          ),
+                          const SizedBox(height: 32),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 230),
+                            child: CustomButton(
+                              title: StaticStrings.getStarted,
+                              onTap: () {
+                                Get.toNamed(AppRoutes.homeScreen);
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 24),
-                      buildDropdown(
-                        'Current School',
-                        controller.schoolOptions,
-                        controller.selectedSchool,
-                      ),
-                      const SizedBox(height: 16),
-                      buildDropdown(
-                        'Elective Subject',
-                        controller.subjectOptions,
-                        controller.selectedSubject,
-                      ),
-                      const SizedBox(height: 16),
-                      buildDropdown(
-                        'Current Grade',
-                        controller.gradeOptions,
-                        controller.selectedGrade,
-                      ),
-                      const SizedBox(height: 16),
-                      buildDropdown(
-                        'How Did You Hear About Us?',
-                        controller.referralOptions,
-                        controller.selectedReferral,
-                      ),
-                      const SizedBox(height: 32),
-                      CustomButton(
-                        title: StaticStrings.getStarted,
-                        onTap: () {
-                          Get.toNamed(AppRoutes.homeScreen);
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
